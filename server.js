@@ -57,6 +57,16 @@ app.get("/api/timestamp/:input", (req, res) => {
 });
 
 
+app.enable("trust proxy");
+/* --- HERE --- */
+/* for req parser */
+app.get("/api/whoami", (req, res) => {
+  let resObj = { ipaddress: req.ip, language: req.get("accept-language"), software: req.get("user-agent") };
+  
+  res.json(resObj);
+});
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
